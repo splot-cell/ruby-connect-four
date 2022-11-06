@@ -1,0 +1,12 @@
+AllCops:
+  Exclude:
+    - 'spec/spec_helper.rb'
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/*'
+    - 'spec_answers/*'
+Layout/LineLength:
+  Exclude:
+    - 'spec/*'
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
