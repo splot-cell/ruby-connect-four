@@ -7,6 +7,7 @@ class Board
     @grid = Array.new(7, Array.new(6))
   end
 
-  def insert
+  def insert(item, col)
+    @grid[col][0] = item
   end
 end
