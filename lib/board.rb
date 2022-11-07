@@ -6,6 +6,10 @@ class Board
   end
 
   def insert(item, col)
-    @grid[col][0] = item
+    @grid[col][empty_row(col)] = item
+  end
+
+  def empty_row(col)
+    @grid[col].find_index(nil)
   end
 end
