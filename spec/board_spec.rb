@@ -114,4 +114,122 @@ describe Board do
       end
     end
   end
+
+  describe "#within_bounds?" do
+    context "when row is 5 and column is 6" do
+      it "returns true" do
+        row = 5
+        col = 6
+        expect(board_init.within_bounds?(row, col)).to be true
+      end
+    end
+
+    context "when the row is 6 and column is 6" do
+      it "returns false" do
+        row = 6
+        col = 6
+        expect(board_init.within_bounds?(row, col)).to be false
+      end
+    end
+
+    context "when the row is 5 and column is 7" do
+      it "returns false" do
+        row = 5
+        col = 7
+        expect(board_init.within_bounds?(row, col)).to be false
+      end
+    end
+
+    context "when the row is -1 and column is 5" do
+      it "returns false" do
+        row = -1
+        col = 5
+        expect(board_init.within_bounds?(row, col)).to be false
+      end
+    end
+
+    context "when the row is 1 and the column is -5" do
+      it "returns false" do
+        row = 1
+        col = -5
+        expect(board_init.within_bounds?(row, col)).to be false
+      end
+    end
+  end
+
+  describe "#game_over?" do
+    context "when a line of four equal elements is made" do
+      context "when the line is vertical" do
+        let(:grid_vert_win) do
+          [[nil, "S", "I", nil, nil, nil, nil],
+           [nil, "W", "I", nil, "G", nil, nil],
+           [nil, "I", "I", nil, "G", nil, nil],
+           ["T", "G", "W", "V", "G", "N", nil],
+           ["T", "A", "O", "A", "G", "I", "I"],
+           ["A", "B", "C", "D", "E", "F", "H"]]
+        end
+        subject(:board_vert) { described_class.new(grid_vert_win) }
+        it "returns true" do
+          expect(board_vert).to be_game_over
+        end
+      end
+      context "when the line is horizontal" do
+        let(:grid_hori_win) do
+          [[nil, "S", "I", nil, nil, nil, nil],
+           [nil, "W", "I", nil, "G", nil, nil],
+           [nil, "I", "I", "I", "I", nil, nil],
+           ["T", "G", "W", "V", "G", "N", nil],
+           ["T", "A", "O", "A", "G", "I", "I"],
+           ["A", "B", "C", "D", "E", "F", "H"]]
+        end
+        subject(:board_hori) { described_class.new(grid_hori_win) }
+        it "returns true" do
+          expect(board_hori).to be_game_over
+        end
+      end
+      context "when the line is diagonal" do
+        let(:grid_diag_win) do
+          [[nil, "S", "I", nil, nil, nil, nil],
+           [nil, "W", "I", nil, "G", nil, nil],
+           [nil, "I", "I", "I", "G", nil, nil],
+           ["T", "G", "W", "V", "I", "N", nil],
+           ["T", "A", "O", "A", "G", "I", "I"],
+           ["A", "B", "C", "D", "E", "F", "H"]]
+        end
+        subject(:board_diag) { described_class.new(grid_diag_win) }
+        it "returns true" do
+          expect(board_diag).to be_game_over
+        end
+      end
+      context "when the line is anti-diagonal" do
+        let(:grid_anti_diag_win) do
+          [[nil, "S", "I", nil, nil, nil, nil],
+           [nil, "W", "I", nil, "G", nil, nil],
+           [nil, "I", "I", "A", "G", nil, nil],
+           ["T", "G", "A", "V", "I", "N", nil],
+           ["T", "A", "O", "A", "G", "I", "I"],
+           ["A", "B", "C", "D", "E", "F", "H"]]
+        end
+        subject(:board_anti_diag) { described_class.new(grid_anti_diag_win) }
+        it "returns true" do
+          expect(board_anti_diag).to be_game_over
+        end
+      end
+    end
+
+    context "when no line of four is made" do
+      let(:grid_no_winner) do
+        [["S", nil, nil, nil, nil, nil, nil],
+         ["C", nil, nil, "D", nil, nil, nil],
+         ["I", nil, "S", "I", nil, "D", nil],
+         ["T", "G", "W", "V", "G", "N", nil],
+         ["T", "A", "O", "A", "G", "I", nil],
+         ["A", "B", "C", "D", "E", "F", nil]]
+      end
+      subject(:board_no_win) { described_class.new(grid_no_winner) }
+      it "returns false" do
+          expect(board_no_win).not_to be_game_over
+      end
+    end
+  end
 end
