@@ -61,6 +61,32 @@ describe Board do
     end
   end
 
+  describe "#column_full?" do
+    let(:grid_full_col) do
+      [["S", nil, nil, nil, nil, nil, nil],
+      ["C", nil, nil, "D", nil, nil, nil],
+      ["I", nil, "S", "I", nil, "D", nil],
+      ["T", "G", "W", "V", "G", "N", nil],
+      ["T", "A", "O", "A", "G", "I", "O"],
+      ["A", "B", "C", "D", "E", "F", "G"]]
+    end
+    subject(:board_full_col) { described_class.new(grid_full_col) }
+
+    context "when the queried column is full" do
+      it "returns true" do
+        col = 0
+        expect(board_full_col.column_full?(col)).to be true
+      end
+    end
+
+    context "when the quiered column is not full" do
+      it "returns false" do
+        col = 5
+        expect(board_full_col.column_full?(col)).to be false
+      end
+    end
+  end
+
   describe "#insert" do
     context "when a column is empty" do
       it "adds an item to the lowest row on the column" do
