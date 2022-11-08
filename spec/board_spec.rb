@@ -39,11 +39,11 @@ describe Board do
     context "when the column has more than one item taken" do
       let(:grid_half_full) do
         [[nil, nil, nil, nil, nil, nil, nil],
-        [nil, nil, nil, "D", nil, nil, nil],
-        [nil, nil, "S", "I", nil, "D", nil],
-        [nil, "G", "W", "V", "G", "N", nil],
-        ["T", "A", "O", "A", "G", "I", "O"],
-        ["A", "B", "C", "D", "E", "F", "G"]]
+         [nil, nil, nil, "D", nil, nil, nil],
+         [nil, nil, "S", "I", nil, "D", nil],
+         [nil, "G", "W", "V", "G", "N", nil],
+         ["T", "A", "O", "A", "G", "I", "O"],
+         ["A", "B", "C", "D", "E", "F", "G"]]
       end
       subject(:board_half_full) { described_class.new(grid_half_full) }
 
@@ -64,11 +64,11 @@ describe Board do
   describe "#column_full?" do
     let(:grid_full_col) do
       [["S", nil, nil, nil, nil, nil, nil],
-      ["C", nil, nil, "D", nil, nil, nil],
-      ["I", nil, "S", "I", nil, "D", nil],
-      ["T", "G", "W", "V", "G", "N", nil],
-      ["T", "A", "O", "A", "G", "I", "O"],
-      ["A", "B", "C", "D", "E", "F", "G"]]
+       ["C", nil, nil, "D", nil, nil, nil],
+       ["I", nil, "S", "I", nil, "D", nil],
+       ["T", "G", "W", "V", "G", "N", nil],
+       ["T", "A", "O", "A", "G", "I", "O"],
+       ["A", "B", "C", "D", "E", "F", "G"]]
     end
     subject(:board_full_col) { described_class.new(grid_full_col) }
 
