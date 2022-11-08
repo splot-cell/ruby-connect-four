@@ -12,4 +12,8 @@ class Board
   def empty_row(col)
     @grid.length - @grid.transpose[col].reverse.find_index(nil) - 1
   end
+
+  def column_full?(col)
+    !@grid[0][col].nil?
+  end
 end
