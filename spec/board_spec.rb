@@ -35,11 +35,11 @@ describe Board do
 
   describe "#empty_row" do
     context "when the column is empty" do
-      it "returns 5" do
+      it "returns index of last row" do
         expect(board_init.empty_row(4)).to eq(5)
       end
 
-      it "returns 5" do
+      it "returns index of last row" do
         expect(board_init.empty_row(6)).to eq(5)
       end
     end
@@ -55,11 +55,11 @@ describe Board do
       end
       subject(:board_one_row) { described_class.new(grid_one_full_row) }
 
-      it "returns 4" do
+      it "returns index of second-last row" do
         expect(board_one_row.empty_row(0)).to eq(4)
       end
 
-      it "returns 4" do
+      it "returns index of second-last row" do
         expect(board_one_row.empty_row(5)).to eq(4)
       end
     end
@@ -76,13 +76,13 @@ describe Board do
       subject(:board_half_full) { described_class.new(grid_half_full) }
 
       context "when column has 2 rows taken" do
-        it "returns 3" do
+        it "returns index of third-last row" do
           expect(board_half_full.empty_row(0)).to eq(3)
         end
       end
 
       context "when column has 5 rows taken" do
-        it "returns 0" do
+        it "returns index of sixth-last row" do
           expect(board_half_full.empty_row(3)).to eq(0)
         end
       end
