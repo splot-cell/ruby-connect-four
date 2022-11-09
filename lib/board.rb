@@ -26,21 +26,24 @@ class Board
   def game_over?
     @grid.each_index do |row_index|
       @grid[row_index].each_index do |col_index|
-        value = @grid[row_index][col_index]
         DIRECTIONS.each do |dir|
-          r = row_index + dir[0]
-          c = col_index + dir[1]
-          line_length = 1
-          while within_bounds?(r, c) && value && @grid[r][c] == value
-            line_length += 1
-            return true if line_length >= TARGET_LENGTH
-
-            r += dir[0]
-            c += dir[1]
-          end
+          return true if connected_line_length(row_index, col_index, dir) >= TARGET_LENGTH
         end
       end
     end
     false
+  end
+
+  def connected_line_length(row_index, col_index, direction_vector)
+    value = @grid[row_index][col_index]
+    r = row_index + direction_vector[0]
+    c = col_index + direction_vector[1]
+    line_length = 1
+    while within_bounds?(r, c) && value && @grid[r][c] == value
+      line_length += 1
+      r += direction_vector[0]
+      c += direction_vector[1]
+    end
+    line_length
   end
 end
