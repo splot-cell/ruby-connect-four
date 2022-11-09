@@ -34,6 +34,8 @@ class Board
     false
   end
 
+  private
+
   def connected_line_length(row_index, col_index, direction_vector)
     value = @grid[row_index][col_index]
     r = row_index + direction_vector[0]
