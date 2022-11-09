@@ -228,7 +228,7 @@ describe Board do
       end
       subject(:board_no_win) { described_class.new(grid_no_winner) }
       it "returns false" do
-          expect(board_no_win).not_to be_game_over
+        expect(board_no_win).not_to be_game_over
       end
     end
   end
