@@ -22,8 +22,8 @@ class Board
   end
 
   DIRECTIONS = [[1, 0], [0, 1], [1, 1], [1, -1]].freeze
+  TARGET_LENGTH = 4
   def game_over?
-    target_length = 4
     @grid.each_index do |row_index|
       @grid[row_index].each_index do |col_index|
         value = @grid[row_index][col_index]
@@ -33,7 +33,7 @@ class Board
           line_length = 1
           while within_bounds?(r, c) && value && @grid[r][c] == value
             line_length += 1
-            return true if line_length >= target_length
+            return true if line_length >= TARGET_LENGTH
 
             r += dir[0]
             c += dir[1]
