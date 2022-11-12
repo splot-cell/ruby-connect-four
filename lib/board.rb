@@ -2,8 +2,11 @@
 
 # Stores the state of the connect-four board
 class Board
+  attr_reader :num_cols
+
   def initialize(grid = Array.new(6, Array.new(7)))
     @grid = grid
+    @num_cols = grid[0].length
   end
 
   # Insert item into the column with index col
