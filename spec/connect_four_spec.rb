@@ -142,7 +142,29 @@ describe ConnectFour do
       end
 
       it "calls #toggle_current_player once" do
-        expect(game_init).to receive(:toggle_current_player)
+        expect(game_init).to receive(:toggle_current_player).once
+        game_init.play
+      end
+    end
+
+    context "when @board.game_over? returns false 5 times, then true" do
+      before do
+        allow(board).to receive(:full?).and_return(false)
+        allow(board).to receive(:game_over?).and_return(false, false, false, false, false, true)
+      end
+
+      it "calls #play_turn six times and stops the loop" do
+        expect(game_init).to receive(:play_turn).exactly(6).times
+        game_init.play
+      end
+
+      it "calls instructions once" do
+        expect(game_init).to receive(:instructions).once
+        game_init.play
+      end
+
+      it "calls #toggle_current_player five times" do
+        expect(game_init).to receive(:toggle_current_player).exactly(5).times
         game_init.play
       end
     end
