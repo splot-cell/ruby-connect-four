@@ -48,6 +48,18 @@ class Board
     @grid.all?(&:all?)
   end
 
+  def to_s
+    str = ""
+    @grid.each do |row|
+      row.each do |e|
+        str += e.nil? ? "   " : e
+        str += "|"
+      end
+      str += "\n"
+    end
+    str
+  end
+
   private
 
   # Returns the length of the line of like-values within @grid in a given direction from a given starting cell
