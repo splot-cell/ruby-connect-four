@@ -5,6 +5,14 @@ require_relative "../lib/board"
 describe Board do
   subject(:board_init) { described_class.new }
 
+  describe "#num_cols" do
+    context "when the default board is initialized" do
+      it "returns 7" do
+        expect(board_init.num_cols).to eq(7)
+      end
+    end
+  end
+
   describe "#empty_row" do
     context "when the column is empty" do
       it "returns index of last row" do
