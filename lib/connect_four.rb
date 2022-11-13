@@ -30,6 +30,29 @@ class ConnectFour
   end
 
   def play_turn
+    display_board
+    column = player_input
+    @board.insert(@current_player[:counter], column)
+  end
+
+  def display_board
+  end
+
+  def input_error
+  end
+
+  def player_input_prompt
+  end
+
+  def player_input
+    player_input_prompt
+    selection = nil
+    loop do
+      selection = gets.chomp.to_i
+      break if validate_input(selection)
+      input_error
+    end
+    selection
   end
 
   def toggle_current_player
