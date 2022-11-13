@@ -114,12 +114,12 @@ describe ConnectFour do
         game_init.play
       end
 
-      it "calls instructions once" do
+      it "calls #instructions once" do
         expect(game_init).to receive(:instructions).once
         game_init.play
       end
 
-      it "calls @winner once" do
+      it "calls #winner once" do
         expect(game_init).to receive(:winner).once
         game_init.play
       end
@@ -136,7 +136,7 @@ describe ConnectFour do
         game_init.play
       end
 
-      it "calls instructions once" do
+      it "calls #instructions once" do
         expect(game_init).to receive(:instructions).once
         game_init.play
       end
@@ -165,6 +165,54 @@ describe ConnectFour do
 
       it "calls #toggle_current_player five times" do
         expect(game_init).to receive(:toggle_current_player).exactly(5).times
+        game_init.play
+      end
+    end
+
+    context "when @board.full? returns true" do
+      before do
+        allow(board).to receive(:full?).and_return(true)
+      end
+
+      it "calls #draw once" do
+        expect(game_init).to receive(:draw).once
+        game_init.play
+      end
+
+      it "does not call #winner" do
+        expect(game_init).not_to receive(:winner)
+        game_init.play
+      end
+
+      it "does not call #play_turn" do
+        expect(game_init).not_to receive(:play_turn)
+        game_init.play
+      end
+    end
+
+    context "when @board.full? returns false once and then true" do
+      before do
+        allow(board).to receive(:full?).and_return(false, true)
+        allow(board).to receive(:game_over?).and_return(false)
+      end
+
+      it "calls draw #once" do
+        expect(game_init).to receive(:draw).once
+        game_init.play
+      end
+
+      it "does not call #winner" do
+        expect(game_init).not_to receive(:winner)
+        game_init.play
+      end
+
+      it "does calls #play_turn once" do
+        expect(game_init).to receive(:play_turn).once
+        game_init.play
+      end
+
+      it "calls toggle_current_player once" do
+        expect(game_init).to receive(:toggle_current_player).once
         game_init.play
       end
     end
