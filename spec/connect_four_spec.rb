@@ -6,6 +6,18 @@ describe ConnectFour do
   let(:board) { double("board", num_cols: 7) }
   subject(:game_init) { described_class.new(board) }
 
+  describe "#initialize" do
+    it "creates a hash called player_one" do
+      player = game_init.instance_variable_get(:@player_one)
+      expect(player).to be_a(Hash)
+    end
+
+    it "creates a hash called player_two" do
+      player = game_init.instance_variable_get(:@player_two)
+      expect(player).to be_a(Hash)
+    end
+  end
+
   describe "#validate_input" do
     context "when the board has 7 columns" do
       context "when the board is empty" do
