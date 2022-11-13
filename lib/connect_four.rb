@@ -5,8 +5,8 @@ require_relative "board"
 class ConnectFour
   def initialize(board = Board.new)
     @board = board
-    @player_one = {num: 1, counter: "\u26aa".encode("utf-8")}
-    @player_two = {num: 2, counter: "\u26ab".encode("utf-8")}
+    @player_one = { num: 1, counter: "\u26aa".encode("utf-8") }
+    @player_two = { num: 2, counter: "\u26ab".encode("utf-8") }
     @current_player = @player_one
   end
 
