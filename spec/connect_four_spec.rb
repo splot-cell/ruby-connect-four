@@ -106,6 +106,11 @@ describe ConnectFour do
         expect(game_init).to receive(:instructions).once
         game_init.play
       end
+
+      it "calls @winner once" do
+        expect(game_init).to receive(:winner).once
+        game_init.play
+      end
     end
 
     context "when the game is won the following turn" do
@@ -123,7 +128,19 @@ describe ConnectFour do
         expect(game_init).to receive(:instructions).once
         game_init.play
       end
+
+      it "calls #toggle_current_player once" do
+        expect(game_init).to receive(:toggle_current_player)
+        game_init.play
+      end
     end
   end
 
+  describe "#toggle_current_player" do
+    context "when @current_player is @player_one" do
+      it "changes @current_player to @player_two" do
+        expect { game_init.toggle_current_player }.to change{ game_init.instance_variable_get(:@current_player) }.from(game_init.instance_variable_get(:@player_one)).to(game_init.instance_variable_get(:@player_two))
+      end
+    end
+  end
 end
