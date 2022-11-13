@@ -142,5 +142,15 @@ describe ConnectFour do
         expect { game_init.toggle_current_player }.to change{ game_init.instance_variable_get(:@current_player) }.from(game_init.instance_variable_get(:@player_one)).to(game_init.instance_variable_get(:@player_two))
       end
     end
+
+    context "when @current_player is @player_two" do
+      before do
+        game_init.instance_variable_set(:@current_player, game_init.instance_variable_get(:@player_two))
+      end
+
+      it "changes @current_player to @player_one" do
+        expect { game_init.toggle_current_player }.to change{ game_init.instance_variable_get(:@current_player) }.from(game_init.instance_variable_get(:@player_two)).to(game_init.instance_variable_get(:@player_one))
+      end
+    end
   end
 end
