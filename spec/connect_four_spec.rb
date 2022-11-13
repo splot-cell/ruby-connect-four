@@ -235,4 +235,40 @@ describe ConnectFour do
       end
     end
   end
+
+  describe "#player_input" do
+    before do
+      allow(game_init).to receive(:player_input_prompt)
+    end
+
+    context "when #validate_input returns true" do
+      before do
+        allow(game_init).to receive(:validate_input).and_return(true)
+      end
+
+      it "breaks loop and returns selection" do
+        selection = 1
+        allow(game_init).to receive(:gets).and_return("1\n")
+        expect(game_init.player_input).to eq(selection)
+      end
+    end
+
+    context "when #validate_input returns false then true" do
+      before do
+        allow(game_init).to receive(:validate_input).and_return(false, true)
+        allow(game_init).to receive(:input_error)
+        allow(game_init).to receive(:gets).and_return("2\n")
+      end
+
+      it "calls #input_error once" do
+        expect(game_init).to receive(:input_error).once
+        game_init.player_input
+      end
+
+      it "calls #gets twice" do
+        expect(game_init).to receive(:gets).twice
+        game_init.player_input
+      end
+    end
+  end
 end
