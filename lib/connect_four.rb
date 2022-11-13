@@ -9,6 +9,34 @@ class ConnectFour
     @player_two = {num: 2, counter: "\u26ab".encode("utf-8")}
   end
 
+  def play
+    instructions
+    loop do
+      return draw if @board.full?
+
+      play_turn
+      break if @board.game_over?
+
+      toggle_current_player
+    end
+    winner(@current_player)
+  end
+
+  def instructions
+  end
+
+  def draw
+  end
+
+  def play_turn
+  end
+
+  def toggle_current_player
+  end
+
+  def winner(change_me)
+  end
+
   def validate_input(selection)
     selection >= 0 && selection < @board.num_cols && !@board.column_full?(selection)
   end
