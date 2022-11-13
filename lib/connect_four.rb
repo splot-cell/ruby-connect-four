@@ -7,6 +7,7 @@ class ConnectFour
     @board = board
     @player_one = {num: 1, counter: "\u26aa".encode("utf-8")}
     @player_two = {num: 2, counter: "\u26ab".encode("utf-8")}
+    @current_player = @player_one
   end
 
   def play
@@ -32,6 +33,7 @@ class ConnectFour
   end
 
   def toggle_current_player
+    @current_player = @current_player == @player_one ? @player_two : @player_one
   end
 
   def winner(change_me)
