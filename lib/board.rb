@@ -44,6 +44,10 @@ class Board
     false
   end
 
+  def full?
+    @grid.all?(&:all?)
+  end
+
   private
 
   # Returns the length of the line of like-values within @grid in a given direction from a given starting cell
