@@ -23,26 +23,12 @@ class ConnectFour
     winner(@current_player)
   end
 
-  def instructions
-  end
-
-  def draw
-  end
-
   def play_turn
     display_board
     column = player_input
     @board.insert(@current_player[:counter], column)
   end
 
-  def display_board
-  end
-
-  def input_error
-  end
-
-  def player_input_prompt
-  end
 
   def player_input
     player_input_prompt
@@ -59,10 +45,28 @@ class ConnectFour
     @current_player = @current_player == @player_one ? @player_two : @player_one
   end
 
-  def winner(change_me)
-  end
-
   def validate_input(selection)
     selection >= 0 && selection < @board.num_cols && !@board.column_full?(selection)
   end
+
+  private
+
+  def winner(change_me)
+  end
+
+  def display_board
+  end
+
+  def input_error
+  end
+
+  def player_input_prompt
+  end
+
+  def instructions
+  end
+
+  def draw
+  end
+
 end
