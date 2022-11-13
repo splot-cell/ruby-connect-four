@@ -240,4 +240,42 @@ describe Board do
       end
     end
   end
+
+  describe "#full?" do
+    context "when the board is empty" do
+      it "returns false" do
+        expect(board_init.full?).to be false
+      end
+    end
+
+    context "when the board is half-empty" do
+      let(:grid_half_empty) do
+        [["S", nil, nil, nil, nil, nil, nil],
+         ["C", nil, nil, "D", nil, nil, nil],
+         ["I", nil, "S", "I", nil, "D", nil],
+         ["T", "G", "W", "V", "G", "N", nil],
+         ["T", "A", "O", "A", "G", "I", "O"],
+         ["A", "B", "C", "D", "E", "F", "G"]]
+        end
+      subject(:board_half_empty) { described_class.new(grid_half_empty) }
+      it "returns false" do
+        expect(board_half_empty.full?).to be false
+      end
+    end
+
+    context "when the board is full" do
+      let(:grid_full) do
+        [["S", "I", "N", "G", "E", "R", "S"],
+         ["C", "A", "R", "D", "A", "G", "S"],
+         ["I", "G", "S", "I", "R", "D", "F"],
+         ["T", "G", "W", "V", "G", "N", "G"],
+         ["T", "A", "O", "A", "G", "I", "O"],
+         ["A", "B", "C", "D", "E", "F", "G"]]
+        end
+      subject(:board_full) { described_class.new(grid_full) }
+      it "returns true" do
+        expect(board_full.full?).to be true
+      end
+    end
+  end
 end
