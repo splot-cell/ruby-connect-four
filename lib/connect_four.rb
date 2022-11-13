@@ -51,22 +51,27 @@ class ConnectFour
 
   private
 
-  def winner(change_me)
+  def winner(player)
+    puts "Player #{player[:num]} wins!"
   end
 
   def display_board
+    puts @board.to_s
   end
 
   def input_error
+    puts "Input error"
   end
 
   def player_input_prompt
+    puts "Enter a selection, Player #{@current_player[:num]}:"
   end
 
   def instructions
+    puts "Instructions here"
   end
 
   def draw
+    puts "It's a draw!"
   end
-
 end
