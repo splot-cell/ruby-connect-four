@@ -96,15 +96,56 @@ describe Board do
   end
 
   describe "#insert" do
-    context "when a column is empty" do
-      it "adds an item to the lowest row on the column" do
+    context "when the board is empty" do
+      it "adds an item to the lowest row on the selected column" do
         item = "X"
         col = 4
         expect { board_init.insert(item, col) }.to change { board_init.instance_variable_get(:@grid)[5][col] }.from(nil).to(item)
       end
+
+      it "does not change other rows in column" do
+        item = "X"
+        col = 4
+        expect { board_init.insert(item, col) }.not_to change { board_init.instance_variable_get(:@grid)[4][col] }
+      end
+
+      it "does not change other items in the grid" do
+        item = "X"
+        col = 3
+        output = [[nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, "X", nil, nil, nil]]
+        expect { board_init.insert(item, col) }.to change { board_init.instance_variable_get(:@grid) }.to(output)
+      end
     end
 
-    context "when a column is not empty" do
+    context "when the selected column is empty but other columns are not" do
+      let(:grid_one_item) do
+        [[nil, nil, nil, nil, nil, nil, nil],
+         [nil, nil, nil, nil, nil, nil, nil],
+         [nil, nil, nil, nil, nil, nil, nil],
+         [nil, nil, nil, nil, nil, nil, nil],
+         [nil, nil, nil, nil, nil, nil, nil],
+         [nil, nil, nil, nil, "A", nil, nil]]
+      end
+      subject(:board_one_item) { described_class.new(grid_one_item) }
+      it "does not change other items in grid" do
+        item = "X"
+        col = 3
+        output = [[nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, "X", "A", nil, nil]]
+        expect { board_one_item.insert(item, col) }.to change { board_one_item.instance_variable_get(:@grid) }.from(grid_one_item).to(output)
+      end
+    end
+
+    context "when the selected column is not empty" do
       let(:grid_non_empty) do
         [[nil, nil, nil, nil, nil, nil, nil],
          [nil, nil, nil, nil, nil, nil, nil],
@@ -119,6 +160,18 @@ describe Board do
         item = "C"
         col = 4
         expect { board_not_empty.insert(item, col) }.to change { board_not_empty.instance_variable_get(:@grid)[3][col] }.from(nil).to(item)
+      end
+
+      it "does not change other items in @grid" do
+        item = "C"
+        col = 4
+        output = [[nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, nil, nil, nil],
+                  [nil, nil, nil, nil, "C", nil, nil],
+                  [nil, nil, nil, nil, "B", nil, nil],
+                  [nil, nil, nil, nil, "A", nil, nil]]
+        expect { board_not_empty.insert(item, col) }.to change { board_not_empty.instance_variable_get(:@grid) }.from(grid_non_empty).to(output)
       end
     end
   end
