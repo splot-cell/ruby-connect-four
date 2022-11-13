@@ -67,4 +67,63 @@ describe ConnectFour do
     end
   end
 
+  describe "#play" do
+    before do
+      allow(game_init).to receive(:instructions)
+      allow(game_init).to receive(:draw)
+      allow(game_init).to receive(:play_turn)
+      allow(game_init).to receive(:toggle_current_player)
+      allow(game_init).to receive(:winner)
+    end
+
+    context "when the game is won this turn" do
+      before do
+        allow(board).to receive(:full?).and_return(false)
+        allow(board).to receive(:game_over?).and_return(true)
+      end
+
+      it "calls #play_turn once and stops the loop" do
+        expect(game_init).to receive(:play_turn).once
+        game_init.play
+      end
+
+      it "calls @board.full? once" do
+        expect(board).to receive(:full?).once
+        game_init.play
+      end
+
+      it "does not call #draw" do
+        expect(game_init).not_to receive(:draw)
+        game_init.play
+      end
+
+      it "does not call #toggle_current_player" do
+        expect(game_init).not_to receive(:toggle_current_player)
+        game_init.play
+      end
+
+      it "calls instructions once" do
+        expect(game_init).to receive(:instructions).once
+        game_init.play
+      end
+    end
+
+    context "when the game is won the following turn" do
+      before do
+        allow(board).to receive(:full?).and_return(false)
+        allow(board).to receive(:game_over?).and_return(false, true)
+      end
+
+      it "calls #play_turn twice and stops the loop" do
+        expect(game_init).to receive(:play_turn).twice
+        game_init.play
+      end
+
+      it "calls instructions once" do
+        expect(game_init).to receive(:instructions).once
+        game_init.play
+      end
+    end
+  end
+
 end
