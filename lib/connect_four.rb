@@ -34,11 +34,11 @@ class ConnectFour
     player_input_prompt
     selection = nil
     loop do
-      selection = gets.chomp.to_i
+      selection = gets.chomp
       break if validate_input(selection)
       input_error
     end
-    selection
+    selection.to_i
   end
 
   def toggle_current_player
@@ -46,7 +46,9 @@ class ConnectFour
   end
 
   def validate_input(selection)
-    selection >= 0 && selection < @board.num_cols && !@board.column_full?(selection)
+    return false unless selection.match(/^[0-9]$/)
+
+    selection.to_i >= 0 && selection.to_i < @board.num_cols && !@board.column_full?(selection.to_i)
   end
 
   private
