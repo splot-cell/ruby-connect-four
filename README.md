@@ -13,6 +13,4 @@ A command line version of connect four, built using TDD.
 
 ## Live preview
 
-Coming soon
-
-<!-- [See a live preview on Replit.](https://replit.com/@splot-cell/ruby-hangman?v=1#README.md) -->
+[See a live preview on Replit.](https://replit.com/@splot-cell/ruby-connect-four?v=1#README.md)
