@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require_relative "board"
+require_relative "text"
 
 class ConnectFour
+  include Text
+
   def initialize(board = Board.new)
     @board = board
     @player_one = { num: 1, counter: "\u26aa".encode("utf-8") }
@@ -55,7 +58,7 @@ class ConnectFour
 
   def winner(player)
     display_board
-    puts "Player #{player[:num]} wins!"
+    puts winner_text(player[:num])
   end
 
   def display_board
@@ -63,18 +66,18 @@ class ConnectFour
   end
 
   def input_error
-    puts "Input error"
+    puts input_error_text
   end
 
   def player_input_prompt
-    puts "Enter a selection, Player #{@current_player[:num]}:"
+    print player_input_prompt_text(@current_player[:num])
   end
 
   def instructions
-    puts "Instructions here"
+    puts instructions_text
   end
 
   def draw
-    puts "It's a draw!"
+    puts draw_text
   end
 end
