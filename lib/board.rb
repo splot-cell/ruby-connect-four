@@ -52,13 +52,13 @@ class Board
     str = ""
     @grid.each do |row|
       str += "|"
-      row.each do |e|
-        str += e.nil? ? "    " : " #{e} "
-        str += "|"
-      end
+      row.each { |e| str += e.nil? ? "    |" : " #{e} |" }
       str += "\n"
     end
-    str
+    @grid[0].length.times do |i|
+      str += "| #{i}. "
+    end
+    str += "|\n"
   end
 
   private
