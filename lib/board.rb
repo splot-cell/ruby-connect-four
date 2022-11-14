@@ -52,7 +52,7 @@ class Board
     str = ""
     @grid.each do |row|
       row.each do |e|
-        str += e.nil? ? "   " : e
+        str += e.nil? ? "   " : " #{e} "
         str += "|"
       end
       str += "\n"
