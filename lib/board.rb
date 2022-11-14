@@ -51,8 +51,9 @@ class Board
   def to_s
     str = ""
     @grid.each do |row|
+      str += "|"
       row.each do |e|
-        str += e.nil? ? "   " : " #{e} "
+        str += e.nil? ? "    " : " #{e} "
         str += "|"
       end
       str += "\n"

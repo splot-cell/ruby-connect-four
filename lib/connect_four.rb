@@ -54,6 +54,7 @@ class ConnectFour
   private
 
   def winner(player)
+    display_board
     puts "Player #{player[:num]} wins!"
   end
 
